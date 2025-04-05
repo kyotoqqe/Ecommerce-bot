@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from infrastructure.database.repo.users import UserRepo
+from infrastructure.database.repo.products import ProductRepo
 from infrastructure.database.setup import create_engine
 
 
@@ -16,13 +17,16 @@ class RequestsRepo:
 
     session: AsyncSession
 
-    @property
+    """  @property
     def users(self) -> UserRepo:
-        """
+        
         The User repository sessions are required to manage user operations.
-        """
-        return UserRepo(self.session)
+        
+        return UserRepo(self.session) """
 
+    @property
+    def products(self) -> ProductRepo:
+        return ProductRepo(self.session)
 
 if __name__ == "__main__":
     from infrastructure.database.setup import create_session_pool
@@ -42,9 +46,12 @@ if __name__ == "__main__":
             repo = RequestsRepo(session)
 
             # Replace user details with the actual values
-            user = await repo.users.get_or_create_user(
+            """ user = await repo.users.get_or_create_user(
                 user_id=12356,
                 full_name="John Doe",
                 language="en",
                 username="johndoe",
-            )
+             )"""
+            
+            products = await repo.products.products_list()
+            print(products)

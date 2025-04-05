@@ -21,7 +21,7 @@ class Property(Base, TableNameMixin, TimestampMixin):
     property_id: Mapped[int] = mapped_column(
         ForeignKey("propertyname.property_id", ondelete="CASCADE"))
 
-    name: Mapped["PropertyName"] = relationship(back_populates="description")
+    name: Mapped["PropertyName"] = relationship(back_populates="descriptions")
 
     products: Mapped[list["Product"]] = relationship(
         back_populates="properties", secondary="productproperties")

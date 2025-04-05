@@ -28,6 +28,7 @@ class Media(models.Model):
     media_type = models.TextField(choices=MEDIA_TYPES)  # This field type is a guess.
     product = models.ForeignKey('Product', models.CASCADE)
     alt_text = models.CharField(max_length=128, blank=True, null=True)
+    image_url = models.URLField(max_length=500,null=True,blank=True)
     is_feature = models.BooleanField()
     created_at = models.DateTimeField()
     updated_at = models.DateTimeField()

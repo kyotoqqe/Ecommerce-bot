@@ -24,6 +24,8 @@ class Product(Base, TableNameMixin, TimestampMixin):
         back_populates="products", secondary="productproperties")
     # comments -> тож надо придумать как обыграть без веб приложения нормальный показ достаточно проблематичен
     category: Mapped["Category"] = relationship(back_populates="product")
+    feature_media: Mapped["Media"] = relationship(back_populates="product",
+                                                  primaryjoin="and_(Product.product_id==Media.product_id, Media.is_feature==True)")
     medias: Mapped[list["Media"]] = relationship(back_populates="product")
 
     wishlisted_by: Mapped[list["WishlistProducts"]

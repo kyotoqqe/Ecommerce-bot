@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.db.models import Q
 from django import forms
+#from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.conf import settings
 import os
@@ -16,14 +17,18 @@ class MediaForm(forms.ModelForm):
     class Meta:
         model = Media
         fields = "__all__"
-    
+
+
     def save(self, commit = True):
         obj = super().save(commit=False)
-        print("dadssf")
         uploaded_file = self.cleaned_data["unput_media"]
-        path = os.path.join(settings.MEDIA_ROOT,"uploads",uploaded_file.name)
+
+        path = default_storage.save(f"uploads/{uploaded_file.name}",uploaded_file)
+        full_path = os.path.join(settings.MEDIA_ROOT, path)
+        obj.image_url = f"https://correctly-united-crane.ngrok-free.app{settings.MEDIA_URL}{uploaded_file.name}"
         obj.save()
-        send_media_task.delay(config.tg_bot.token,path,obj.media_id,config.tg_bot.channel_id)
+        send_media_task.delay(config.tg_bot.token,full_path,obj.media_id,config.tg_bot.channel_id)
+        #default_storage.delete(full_path)
         return obj
     
 

@@ -20,6 +20,7 @@ class Media(Base, TableNameMixin, TimestampMixin):
     media_type: Mapped[MediaType]
     product_id: Mapped[int] = mapped_column(
         ForeignKey("product.product_id", ondelete="CASCADE"))
+    image_url:Mapped[str] = mapped_column(String(500),nullable=True)
     alt_text: Mapped[Optional[str]] = mapped_column(
         String(128), nullable=True, default="Изображение карточки товара")
     is_feature: Mapped[bool] = mapped_column(default=False, nullable=False)

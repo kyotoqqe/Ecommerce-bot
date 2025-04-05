@@ -1,0 +1,7 @@
+version: 2
+authtoken: 2vAOrMtE9Pv7X9NH31acwD2NcnU_75V99SXLQTKmWywxS9u18
+tunnels:
+  first:
+    addr: nginx-media:80 #admin:8000
+    proto: http
+    domain: correctly-united-crane.ngrok-free.app

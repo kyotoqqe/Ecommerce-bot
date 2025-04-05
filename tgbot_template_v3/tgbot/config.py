@@ -153,8 +153,8 @@ class Celery:
 
     @staticmethod
     def from_env(env:Env):
-        broker = env.str("CELERY_BROKER")
-        backend = env.str("CELERY_BACKEND")
+        broker = env.str("CELERY_BROKER_URL")
+        backend = env.str("CELERY_RESULT_BACKEND")
         return Celery(broker,backend)
 
 @dataclass

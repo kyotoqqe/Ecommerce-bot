@@ -43,9 +43,9 @@ class User(Base, TimestampMixin, TableNameMixin):
 
     wishlist: Mapped["Wishlist"] = relationship(back_populates="user")
     referrers_user: Mapped[list["Referal"]] = relationship(
-        back_populates="referrers")
+        back_populates="referrers",foreign_keys="Referal.referrers_id")
     refers_user: Mapped[list["Referal"]] = relationship(
-        back_populates="refers")
+        back_populates="refers",foreign_keys="Referal.refers_id")
 
     def __repr__(self):
         return f"<User {self.user_id} {self.username} {self.full_name}>"
@@ -59,5 +59,5 @@ class Referal(Base, TableNameMixin):
     refers_id: Mapped[int] = mapped_column(
         ForeignKey("user.user_id", ondelete="CASCADE"))
 
-    referrers: Mapped["User"] = relationship(back_populates="referrers_user")
-    refers: Mapped["User"] = relationship(back_populates="refers_user")
+    referrers: Mapped["User"] = relationship(back_populates="referrers_user",foreign_keys=[referrers_id])
+    refers: Mapped["User"] = relationship(back_populates="refers_user",foreign_keys=[refers_id])
