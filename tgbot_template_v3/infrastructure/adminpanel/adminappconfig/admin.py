@@ -62,6 +62,8 @@ class ProductAdmin(admin.ModelAdmin):
     list_filter = ["title", "price", "category__name", "properties"]
     raw_id_fields = ["properties", "category"]
 
+    
+
 
 admin.site.register(Product, ProductAdmin)
 

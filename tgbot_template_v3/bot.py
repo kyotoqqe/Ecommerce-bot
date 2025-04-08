@@ -95,7 +95,7 @@ async def main():
     storage = get_storage(config)
 
     bot = Bot(token=config.tg_bot.token,
-              default=DefaultBotProperties(parse_mode="HTML", link_preview_is_disabled=True))
+              default=DefaultBotProperties(parse_mode="HTML"))
     dp = Dispatcher(storage=storage)
 
     dp.include_routers(*routers_list)

@@ -4,6 +4,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 from infrastructure.database.repo.users import UserRepo
 from infrastructure.database.repo.products import ProductRepo
+from infrastructure.database.repo.categories import CategoryRepo
 from infrastructure.database.setup import create_engine
 
 
@@ -27,6 +28,10 @@ class RequestsRepo:
     @property
     def products(self) -> ProductRepo:
         return ProductRepo(self.session)
+    
+    @property
+    def categories(self)->CategoryRepo:
+        return CategoryRepo(self.session)
 
 if __name__ == "__main__":
     from infrastructure.database.setup import create_session_pool

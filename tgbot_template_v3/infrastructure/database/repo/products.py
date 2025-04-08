@@ -17,4 +17,5 @@ class ProductRepo(BaseRepo):
         res = await self.session.execute(stmt)
         return res.unique().scalar_one()
 
+    
 
